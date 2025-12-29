@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Design Inception',
-  description: 'Whyから始めるデザインプロセス',
+  title: 'Whyfirst',
+  description: 'Why First. 作れる時代だから、「なぜ作るか」が問われている。',
 }
 
 export default function RootLayout({
@@ -24,9 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {children}
-      </body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
     </html>
   )
 }
