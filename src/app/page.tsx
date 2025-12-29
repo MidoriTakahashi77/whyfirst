@@ -1,10 +1,8 @@
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold">Design Inception</h1>
-      <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-400">
-        Coming soon...
-      </p>
+      <h1 className="text-4xl font-bold">Whyfirst</h1>
+      <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-400">Coming soon...</p>
     </main>
   )
 }
