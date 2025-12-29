@@ -1,0 +1,556 @@
+import type { MoodPreset } from '../../types'
+
+export const moodPresets: MoodPreset[] = [
+  // Energy
+  {
+    id: 'energetic',
+    label: 'Energetic',
+    labelJa: 'エネルギッシュ',
+    category: 'energy',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'dynamic',
+    label: 'Dynamic',
+    labelJa: 'ダイナミック',
+    category: 'energy',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'vibrant',
+    label: 'Vibrant',
+    labelJa: '活気のある',
+    category: 'energy',
+    isOnomatopoeia: false,
+  },
+  { id: 'bold', label: 'Bold', labelJa: '大胆な', category: 'energy', isOnomatopoeia: false },
+  {
+    id: 'powerful',
+    label: 'Powerful',
+    labelJa: '力強い',
+    category: 'energy',
+    isOnomatopoeia: false,
+  },
+
+  // Calm
+  { id: 'calm', label: 'Calm', labelJa: '穏やかな', category: 'calm', isOnomatopoeia: false },
+  { id: 'peaceful', label: 'Peaceful', labelJa: '平和な', category: 'calm', isOnomatopoeia: false },
+  { id: 'serene', label: 'Serene', labelJa: '静かな', category: 'calm', isOnomatopoeia: false },
+  {
+    id: 'relaxed',
+    label: 'Relaxed',
+    labelJa: 'リラックスした',
+    category: 'calm',
+    isOnomatopoeia: false,
+  },
+  { id: 'gentle', label: 'Gentle', labelJa: '優しい', category: 'calm', isOnomatopoeia: false },
+
+  // Professional
+  {
+    id: 'professional',
+    label: 'Professional',
+    labelJa: 'プロフェッショナル',
+    category: 'professional',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'corporate',
+    label: 'Corporate',
+    labelJa: '企業的な',
+    category: 'professional',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'trustworthy',
+    label: 'Trustworthy',
+    labelJa: '信頼できる',
+    category: 'professional',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'reliable',
+    label: 'Reliable',
+    labelJa: '頼りになる',
+    category: 'professional',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'authoritative',
+    label: 'Authoritative',
+    labelJa: '権威ある',
+    category: 'professional',
+    isOnomatopoeia: false,
+  },
+
+  // Friendly
+  {
+    id: 'friendly',
+    label: 'Friendly',
+    labelJa: 'フレンドリー',
+    category: 'friendly',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'approachable',
+    label: 'Approachable',
+    labelJa: '親しみやすい',
+    category: 'friendly',
+    isOnomatopoeia: false,
+  },
+  { id: 'warm', label: 'Warm', labelJa: '温かい', category: 'friendly', isOnomatopoeia: false },
+  {
+    id: 'inviting',
+    label: 'Inviting',
+    labelJa: '魅力的な',
+    category: 'friendly',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'welcoming',
+    label: 'Welcoming',
+    labelJa: '歓迎する',
+    category: 'friendly',
+    isOnomatopoeia: false,
+  },
+
+  // Modern
+  { id: 'modern', label: 'Modern', labelJa: 'モダン', category: 'modern', isOnomatopoeia: false },
+  {
+    id: 'contemporary',
+    label: 'Contemporary',
+    labelJa: '現代的な',
+    category: 'modern',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'cutting-edge',
+    label: 'Cutting-edge',
+    labelJa: '最先端の',
+    category: 'modern',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'innovative',
+    label: 'Innovative',
+    labelJa: '革新的な',
+    category: 'modern',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'futuristic',
+    label: 'Futuristic',
+    labelJa: '未来的な',
+    category: 'modern',
+    isOnomatopoeia: false,
+  },
+
+  // Classic
+  {
+    id: 'classic',
+    label: 'Classic',
+    labelJa: 'クラシック',
+    category: 'classic',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'timeless',
+    label: 'Timeless',
+    labelJa: '時代を超えた',
+    category: 'classic',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'traditional',
+    label: 'Traditional',
+    labelJa: '伝統的な',
+    category: 'classic',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'elegant',
+    label: 'Elegant',
+    labelJa: 'エレガント',
+    category: 'classic',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'sophisticated',
+    label: 'Sophisticated',
+    labelJa: '洗練された',
+    category: 'classic',
+    isOnomatopoeia: false,
+  },
+
+  // Playful
+  {
+    id: 'playful',
+    label: 'Playful',
+    labelJa: '遊び心のある',
+    category: 'playful',
+    isOnomatopoeia: false,
+  },
+  { id: 'fun', label: 'Fun', labelJa: '楽しい', category: 'playful', isOnomatopoeia: false },
+  {
+    id: 'whimsical',
+    label: 'Whimsical',
+    labelJa: '気まぐれな',
+    category: 'playful',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'cheerful',
+    label: 'Cheerful',
+    labelJa: '陽気な',
+    category: 'playful',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'youthful',
+    label: 'Youthful',
+    labelJa: '若々しい',
+    category: 'playful',
+    isOnomatopoeia: false,
+  },
+
+  // Minimal
+  {
+    id: 'minimal',
+    label: 'Minimal',
+    labelJa: 'ミニマル',
+    category: 'minimal',
+    isOnomatopoeia: false,
+  },
+  { id: 'clean', label: 'Clean', labelJa: 'クリーン', category: 'minimal', isOnomatopoeia: false },
+  {
+    id: 'simple',
+    label: 'Simple',
+    labelJa: 'シンプル',
+    category: 'minimal',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'understated',
+    label: 'Understated',
+    labelJa: '控えめな',
+    category: 'minimal',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'refined',
+    label: 'Refined',
+    labelJa: '洗練された',
+    category: 'minimal',
+    isOnomatopoeia: false,
+  },
+
+  // Luxury
+  {
+    id: 'luxurious',
+    label: 'Luxurious',
+    labelJa: '豪華な',
+    category: 'luxury',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'premium',
+    label: 'Premium',
+    labelJa: 'プレミアム',
+    category: 'luxury',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'exclusive',
+    label: 'Exclusive',
+    labelJa: '限定的な',
+    category: 'luxury',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'high-end',
+    label: 'High-end',
+    labelJa: '高級な',
+    category: 'luxury',
+    isOnomatopoeia: false,
+  },
+  { id: 'opulent', label: 'Opulent', labelJa: '贅沢な', category: 'luxury', isOnomatopoeia: false },
+
+  // Creative
+  {
+    id: 'creative',
+    label: 'Creative',
+    labelJa: 'クリエイティブ',
+    category: 'creative',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'artistic',
+    label: 'Artistic',
+    labelJa: '芸術的な',
+    category: 'creative',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'expressive',
+    label: 'Expressive',
+    labelJa: '表現豊かな',
+    category: 'creative',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'imaginative',
+    label: 'Imaginative',
+    labelJa: '想像力豊かな',
+    category: 'creative',
+    isOnomatopoeia: false,
+  },
+  {
+    id: 'unique',
+    label: 'Unique',
+    labelJa: 'ユニーク',
+    category: 'creative',
+    isOnomatopoeia: false,
+  },
+
+  // Onomatopoeia - Wakuwaku
+  {
+    id: 'wakuwaku',
+    label: 'Exciting',
+    labelJa: 'わくわく',
+    category: 'onomatopoeia-wakuwaku',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'dokidoki',
+    label: 'Thrilling',
+    labelJa: 'どきどき',
+    category: 'onomatopoeia-wakuwaku',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'ukiuki',
+    label: 'Uplifting',
+    labelJa: 'うきうき',
+    category: 'onomatopoeia-wakuwaku',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'kyunkyun',
+    label: 'Heartwarming',
+    labelJa: 'きゅんきゅん',
+    category: 'onomatopoeia-wakuwaku',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'runrun',
+    label: 'Joyful',
+    labelJa: 'るんるん',
+    category: 'onomatopoeia-wakuwaku',
+    isOnomatopoeia: true,
+  },
+
+  // Onomatopoeia - Kirakira
+  {
+    id: 'kirakira',
+    label: 'Sparkling',
+    labelJa: 'きらきら',
+    category: 'onomatopoeia-kirakira',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'pikapika',
+    label: 'Shiny',
+    labelJa: 'ぴかぴか',
+    category: 'onomatopoeia-kirakira',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'tsuyatsuya',
+    label: 'Glossy',
+    labelJa: 'つやつや',
+    category: 'onomatopoeia-kirakira',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'kirari',
+    label: 'Gleaming',
+    labelJa: 'きらり',
+    category: 'onomatopoeia-kirakira',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'giragira',
+    label: 'Glaring',
+    labelJa: 'ぎらぎら',
+    category: 'onomatopoeia-kirakira',
+    isOnomatopoeia: true,
+  },
+
+  // Onomatopoeia - Fuwafuwa
+  {
+    id: 'fuwafuwa',
+    label: 'Fluffy',
+    labelJa: 'ふわふわ',
+    category: 'onomatopoeia-fuwafuwa',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'funwari',
+    label: 'Soft',
+    labelJa: 'ふんわり',
+    category: 'onomatopoeia-fuwafuwa',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'mofumofu',
+    label: 'Cozy',
+    labelJa: 'もふもふ',
+    category: 'onomatopoeia-fuwafuwa',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'howahowa',
+    label: 'Gentle',
+    labelJa: 'ほわほわ',
+    category: 'onomatopoeia-fuwafuwa',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'yuruyuru',
+    label: 'Loose',
+    labelJa: 'ゆるゆる',
+    category: 'onomatopoeia-fuwafuwa',
+    isOnomatopoeia: true,
+  },
+
+  // Onomatopoeia - Sukkiri
+  {
+    id: 'sukkiri',
+    label: 'Refreshing',
+    labelJa: 'すっきり',
+    category: 'onomatopoeia-sukkiri',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'sappari',
+    label: 'Clean',
+    labelJa: 'さっぱり',
+    category: 'onomatopoeia-sukkiri',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'shakitto',
+    label: 'Crisp',
+    labelJa: 'しゃきっと',
+    category: 'onomatopoeia-sukkiri',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'pakitto',
+    label: 'Sharp',
+    labelJa: 'ぱきっと',
+    category: 'onomatopoeia-sukkiri',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'kiritto',
+    label: 'Sleek',
+    labelJa: 'きりっと',
+    category: 'onomatopoeia-sukkiri',
+    isOnomatopoeia: true,
+  },
+
+  // Onomatopoeia - Shittori
+  {
+    id: 'shittori',
+    label: 'Subdued',
+    labelJa: 'しっとり',
+    category: 'onomatopoeia-shittori',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'hokkori',
+    label: 'Heartwarming',
+    labelJa: 'ほっこり',
+    category: 'onomatopoeia-shittori',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'pokapoka',
+    label: 'Warm',
+    labelJa: 'ぽかぽか',
+    category: 'onomatopoeia-shittori',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'jinwari',
+    label: 'Gradual',
+    labelJa: 'じんわり',
+    category: 'onomatopoeia-shittori',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'mattari',
+    label: 'Mellow',
+    labelJa: 'まったり',
+    category: 'onomatopoeia-shittori',
+    isOnomatopoeia: true,
+  },
+
+  // Onomatopoeia - Dosshiri
+  {
+    id: 'dosshiri',
+    label: 'Solid',
+    labelJa: 'どっしり',
+    category: 'onomatopoeia-dosshiri',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'gacchiri',
+    label: 'Robust',
+    labelJa: 'がっちり',
+    category: 'onomatopoeia-dosshiri',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'zusshiri',
+    label: 'Weighty',
+    labelJa: 'ずっしり',
+    category: 'onomatopoeia-dosshiri',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'shikkari',
+    label: 'Firm',
+    labelJa: 'しっかり',
+    category: 'onomatopoeia-dosshiri',
+    isOnomatopoeia: true,
+  },
+  {
+    id: 'gutto',
+    label: 'Impactful',
+    labelJa: 'ぐっと',
+    category: 'onomatopoeia-dosshiri',
+    isOnomatopoeia: true,
+  },
+]
+
+export const moodCategories = [
+  'energy',
+  'calm',
+  'professional',
+  'friendly',
+  'modern',
+  'classic',
+  'playful',
+  'minimal',
+  'luxury',
+  'creative',
+  'onomatopoeia-wakuwaku',
+  'onomatopoeia-kirakira',
+  'onomatopoeia-fuwafuwa',
+  'onomatopoeia-sukkiri',
+  'onomatopoeia-shittori',
+  'onomatopoeia-dosshiri',
+] as const
+
+export type MoodCategory = (typeof moodCategories)[number]
