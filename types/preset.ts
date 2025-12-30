@@ -1,5 +1,6 @@
-import type { Animation, BorderRadius, Spacing } from './theme'
+import type { Animation, ColourPaletteType, ShapeType, SpaceType } from './theme'
 
+// Mood Types
 export interface MoodPreset {
   id: string
   label: string
@@ -8,51 +9,60 @@ export interface MoodPreset {
   isOnomatopoeia: boolean
 }
 
+export interface MoodCategory {
+  id: string
+  label: string
+  labelJa: string
+  moods: Omit<MoodPreset, 'category' | 'isOnomatopoeia'>[]
+}
+
+export interface Onomatopoeia {
+  id: string
+  label: string
+  labelJa: string
+}
+
+// Colour Types
 export interface ColourPreset {
   id: string
-  label: string
-  labelJa: string
-  tailwind: {
-    color: string
-    shade: number
-  }
-  searchTerms: string[]
-  isOnomatopoeia: boolean
+  name: string
+  nameJa: string
+  hex: string
+  description: string
+  paletteType: ColourPaletteType
 }
 
+// Movement Types
 export interface MovementPreset {
   id: string
-  label: string
-  labelJa: string
+  name: string
+  nameJa: string
   description: string
-  descriptionJa: string
-  cssValue: {
-    animation: Animation
-  }
+  keywords: string[]
+  animation: Animation
 }
 
+// Shape Types
 export interface ShapePreset {
   id: string
-  label: string
-  labelJa: string
+  name: string
+  nameJa: string
   description: string
-  descriptionJa: string
-  cssValue: {
-    borderRadius: BorderRadius
-  }
+  keywords: string[]
+  shapeType: ShapeType
 }
 
+// Space Types
 export interface SpacePreset {
   id: string
-  label: string
-  labelJa: string
+  name: string
+  nameJa: string
   description: string
-  descriptionJa: string
-  cssValue: {
-    spacing: Spacing
-  }
+  keywords: string[]
+  spaceType: SpaceType
 }
 
+// Mapping Types
 export interface MoodMapping {
   moodId: string
   movements: string[]

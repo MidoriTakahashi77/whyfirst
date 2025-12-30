@@ -1,5 +1,122 @@
-import type { MoodPreset } from '../../types'
+import type { MoodCategory, MoodPreset, Onomatopoeia } from '../../types'
 
+// Category-based mood structure (for UI)
+export const moodCategories: MoodCategory[] = [
+  {
+    id: 'energy',
+    label: 'Energy',
+    labelJa: 'エネルギッシュ',
+    moods: [
+      { id: 'energetic', label: 'Energetic', labelJa: 'エネルギッシュ' },
+      { id: 'dynamic', label: 'Dynamic', labelJa: 'ダイナミック' },
+      { id: 'vibrant', label: 'Vibrant', labelJa: '活気のある' },
+      { id: 'bold', label: 'Bold', labelJa: '大胆な' },
+      { id: 'powerful', label: 'Powerful', labelJa: '力強い' },
+    ],
+  },
+  {
+    id: 'calm',
+    label: 'Calm',
+    labelJa: '穏やか',
+    moods: [
+      { id: 'calm', label: 'Calm', labelJa: '穏やかな' },
+      { id: 'peaceful', label: 'Peaceful', labelJa: '平和な' },
+      { id: 'serene', label: 'Serene', labelJa: '静謐な' },
+      { id: 'relaxed', label: 'Relaxed', labelJa: 'リラックス' },
+      { id: 'gentle', label: 'Gentle', labelJa: '優しい' },
+    ],
+  },
+  {
+    id: 'professional',
+    label: 'Professional',
+    labelJa: 'プロフェッショナル',
+    moods: [
+      { id: 'professional', label: 'Professional', labelJa: 'プロフェッショナル' },
+      { id: 'corporate', label: 'Corporate', labelJa: 'コーポレート' },
+      { id: 'trustworthy', label: 'Trustworthy', labelJa: '信頼できる' },
+      { id: 'reliable', label: 'Reliable', labelJa: '頼れる' },
+      { id: 'authoritative', label: 'Authoritative', labelJa: '権威ある' },
+    ],
+  },
+  {
+    id: 'friendly',
+    label: 'Friendly',
+    labelJa: 'フレンドリー',
+    moods: [
+      { id: 'friendly', label: 'Friendly', labelJa: 'フレンドリー' },
+      { id: 'approachable', label: 'Approachable', labelJa: '親しみやすい' },
+      { id: 'warm', label: 'Warm', labelJa: '温かい' },
+      { id: 'inviting', label: 'Inviting', labelJa: '招き入れる' },
+      { id: 'welcoming', label: 'Welcoming', labelJa: '歓迎する' },
+    ],
+  },
+  {
+    id: 'modern',
+    label: 'Modern',
+    labelJa: 'モダン',
+    moods: [
+      { id: 'modern', label: 'Modern', labelJa: 'モダン' },
+      { id: 'contemporary', label: 'Contemporary', labelJa: 'コンテンポラリー' },
+      { id: 'cutting-edge', label: 'Cutting-edge', labelJa: '最先端' },
+      { id: 'innovative', label: 'Innovative', labelJa: '革新的' },
+      { id: 'futuristic', label: 'Futuristic', labelJa: '未来的' },
+    ],
+  },
+  {
+    id: 'minimal',
+    label: 'Minimal',
+    labelJa: 'ミニマル',
+    moods: [
+      { id: 'minimal', label: 'Minimal', labelJa: 'ミニマル' },
+      { id: 'clean', label: 'Clean', labelJa: 'クリーン' },
+      { id: 'simple', label: 'Simple', labelJa: 'シンプル' },
+      { id: 'understated', label: 'Understated', labelJa: '控えめ' },
+      { id: 'refined', label: 'Refined', labelJa: '洗練された' },
+    ],
+  },
+  {
+    id: 'playful',
+    label: 'Playful',
+    labelJa: '遊び心',
+    moods: [
+      { id: 'playful', label: 'Playful', labelJa: '遊び心のある' },
+      { id: 'fun', label: 'Fun', labelJa: '楽しい' },
+      { id: 'whimsical', label: 'Whimsical', labelJa: '気まぐれな' },
+      { id: 'cheerful', label: 'Cheerful', labelJa: '陽気な' },
+      { id: 'youthful', label: 'Youthful', labelJa: '若々しい' },
+    ],
+  },
+  {
+    id: 'luxury',
+    label: 'Luxury',
+    labelJa: 'ラグジュアリー',
+    moods: [
+      { id: 'luxurious', label: 'Luxurious', labelJa: '豪華な' },
+      { id: 'premium', label: 'Premium', labelJa: 'プレミアム' },
+      { id: 'exclusive', label: 'Exclusive', labelJa: '特別な' },
+      { id: 'elegant', label: 'Elegant', labelJa: 'エレガント' },
+      { id: 'sophisticated', label: 'Sophisticated', labelJa: '洗練された' },
+    ],
+  },
+]
+
+// Onomatopoeia list (for UI)
+export const onomatopoeiaList: Onomatopoeia[] = [
+  { id: 'wakuwaku', label: 'わくわく', labelJa: 'わくわく' },
+  { id: 'dokidoki', label: 'どきどき', labelJa: 'どきどき' },
+  { id: 'ukiuki', label: 'うきうき', labelJa: 'うきうき' },
+  { id: 'kirakira', label: 'きらきら', labelJa: 'きらきら' },
+  { id: 'pikapika', label: 'ぴかぴか', labelJa: 'ぴかぴか' },
+  { id: 'fuwafuwa', label: 'ふわふわ', labelJa: 'ふわふわ' },
+  { id: 'funwari', label: 'ふんわり', labelJa: 'ふんわり' },
+  { id: 'sukkiri', label: 'すっきり', labelJa: 'すっきり' },
+  { id: 'sappari', label: 'さっぱり', labelJa: 'さっぱり' },
+  { id: 'shittori', label: 'しっとり', labelJa: 'しっとり' },
+  { id: 'hokkori', label: 'ほっこり', labelJa: 'ほっこり' },
+  { id: 'dosshiri', label: 'どっしり', labelJa: 'どっしり' },
+]
+
+// Flat mood presets (for data processing)
 export const moodPresets: MoodPreset[] = [
   // Energy
   {
@@ -534,7 +651,7 @@ export const moodPresets: MoodPreset[] = [
   },
 ]
 
-export const moodCategories = [
+export const moodCategoryIds = [
   'energy',
   'calm',
   'professional',
@@ -553,4 +670,4 @@ export const moodCategories = [
   'onomatopoeia-dosshiri',
 ] as const
 
-export type MoodCategory = (typeof moodCategories)[number]
+export type MoodCategoryId = (typeof moodCategoryIds)[number]

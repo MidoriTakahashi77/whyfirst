@@ -15,6 +15,10 @@ export type SessionMode = 'full' | 'quick'
 export type DetectedLanguage = 'en' | 'ja'
 
 export interface WhyData {
+  who: string
+  problem: string
+  solution: string
+  outcome: string
   rawInput: string
 }
 
