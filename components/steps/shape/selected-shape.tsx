@@ -9,6 +9,135 @@ interface SelectedShapeProps {
   onBack: () => void
 }
 
+const renderShapePreview = (shapeType: string) => {
+  const color = '#ffffff'
+
+  switch (shapeType) {
+    case 'geometric':
+      return (
+        <svg width={80} height={80} viewBox="0 0 60 60" aria-hidden="true">
+          <rect x="10" y="10" width="40" height="40" fill={color} />
+        </svg>
+      )
+    case 'rounded':
+      return (
+        <svg width={80} height={80} viewBox="0 0 60 60" aria-hidden="true">
+          <rect x="10" y="10" width="40" height="40" rx="12" ry="12" fill={color} />
+        </svg>
+      )
+    case 'circular':
+      return (
+        <svg width={80} height={80} viewBox="0 0 60 60" aria-hidden="true">
+          <circle cx="30" cy="30" r="22" fill={color} />
+        </svg>
+      )
+    case 'organic':
+      return (
+        <svg width={80} height={80} viewBox="0 0 60 60" aria-hidden="true">
+          <path
+            d="M30 8 C45 12, 52 25, 48 38 C44 51, 30 54, 18 48 C6 42, 8 28, 14 18 C20 8, 30 8, 30 8Z"
+            fill={color}
+          />
+        </svg>
+      )
+    case 'angular':
+      return (
+        <svg width={80} height={80} viewBox="0 0 60 60" aria-hidden="true">
+          <polygon points="30,8 52,50 8,50" fill={color} />
+        </svg>
+      )
+    case 'minimal':
+      return (
+        <svg width={80} height={80} viewBox="0 0 60 60" aria-hidden="true">
+          <line x1="10" y1="30" x2="50" y2="30" stroke={color} strokeWidth="3" />
+          <line x1="30" y1="10" x2="30" y2="50" stroke={color} strokeWidth="3" />
+        </svg>
+      )
+    case 'striped':
+      return (
+        <svg width={80} height={80} viewBox="0 0 60 60" aria-hidden="true">
+          <line x1="10" y1="14" x2="50" y2="14" stroke={color} strokeWidth="4" />
+          <line x1="10" y1="26" x2="50" y2="26" stroke={color} strokeWidth="4" />
+          <line x1="10" y1="38" x2="50" y2="38" stroke={color} strokeWidth="4" />
+          <line x1="10" y1="50" x2="50" y2="50" stroke={color} strokeWidth="4" />
+        </svg>
+      )
+    case 'grid':
+      return (
+        <svg width={80} height={80} viewBox="0 0 60 60" aria-hidden="true">
+          <rect x="8" y="8" width="18" height="18" fill={color} />
+          <rect x="34" y="8" width="18" height="18" fill={color} />
+          <rect x="8" y="34" width="18" height="18" fill={color} />
+          <rect x="34" y="34" width="18" height="18" fill={color} />
+        </svg>
+      )
+    case 'dots':
+      return (
+        <svg width={80} height={80} viewBox="0 0 60 60" aria-hidden="true">
+          <circle cx="15" cy="15" r="6" fill={color} />
+          <circle cx="30" cy="15" r="6" fill={color} />
+          <circle cx="45" cy="15" r="6" fill={color} />
+          <circle cx="15" cy="30" r="6" fill={color} />
+          <circle cx="30" cy="30" r="6" fill={color} />
+          <circle cx="45" cy="30" r="6" fill={color} />
+          <circle cx="15" cy="45" r="6" fill={color} />
+          <circle cx="30" cy="45" r="6" fill={color} />
+          <circle cx="45" cy="45" r="6" fill={color} />
+        </svg>
+      )
+    case 'hexagon':
+      return (
+        <svg width={80} height={80} viewBox="0 0 60 60" aria-hidden="true">
+          <polygon points="30,5 52,17 52,43 30,55 8,43 8,17" fill={color} />
+        </svg>
+      )
+    case 'diamond':
+      return (
+        <svg width={80} height={80} viewBox="0 0 60 60" aria-hidden="true">
+          <polygon points="30,6 54,30 30,54 6,30" fill={color} />
+        </svg>
+      )
+    case 'pattern':
+      return (
+        <svg width={80} height={80} viewBox="0 0 60 60" aria-hidden="true">
+          <polygon points="15,8 22,20 8,20" fill={color} />
+          <polygon points="30,8 37,20 23,20" fill={color} />
+          <polygon points="45,8 52,20 38,20" fill={color} />
+          <polygon points="22,22 29,34 15,34" fill={color} />
+          <polygon points="37,22 44,34 30,34" fill={color} />
+          <polygon points="15,36 22,48 8,48" fill={color} />
+          <polygon points="30,36 37,48 23,48" fill={color} />
+          <polygon points="45,36 52,48 38,48" fill={color} />
+        </svg>
+      )
+    case 'wave':
+      return (
+        <svg width={80} height={80} viewBox="0 0 60 60" aria-hidden="true">
+          <path d="M5 20 Q15 10, 25 20 T45 20 T55 20" fill="none" stroke={color} strokeWidth="3" />
+          <path d="M5 32 Q15 22, 25 32 T45 32 T55 32" fill="none" stroke={color} strokeWidth="3" />
+          <path d="M5 44 Q15 34, 25 44 T45 44 T55 44" fill="none" stroke={color} strokeWidth="3" />
+        </svg>
+      )
+    case 'pill':
+      return (
+        <svg width={80} height={80} viewBox="0 0 60 60" aria-hidden="true">
+          <rect x="8" y="20" width="44" height="20" rx="10" ry="10" fill={color} />
+        </svg>
+      )
+    case 'blob':
+      return (
+        <svg width={80} height={80} viewBox="0 0 60 60" aria-hidden="true">
+          <path
+            d="M30 6 C42 6, 54 14, 52 28 C50 42, 56 48, 42 54 C28 60, 18 54, 12 44 C6 34, 8 22, 16 14 C24 6, 30 6, 30 6Z"
+            fill={color}
+          />
+        </svg>
+      )
+    default:
+      return null
+  }
+}
+
 export function SelectedShape({ onNext, onBack }: SelectedShapeProps) {
   const session = useSessionStore((state) => state.session)
   const selected = session?.shape?.selected ?? []
@@ -32,8 +161,8 @@ export function SelectedShape({ onNext, onBack }: SelectedShapeProps) {
       {selectedShape ? (
         <div className="mb-6">
           <div className="bg-[#171717] rounded-xl p-6 mb-4">
-            <div className="h-20 flex items-center justify-center">
-              <div className="w-16 h-16 bg-white rounded-lg" />
+            <div className="h-24 flex items-center justify-center">
+              {renderShapePreview(selectedShape.shapeType)}
             </div>
           </div>
 
