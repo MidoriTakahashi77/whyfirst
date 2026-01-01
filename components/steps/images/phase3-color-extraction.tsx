@@ -1,7 +1,8 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
+import { useColorMagnifier } from '@/lib/hooks'
 import { useSessionStore } from '@/lib/store/session-store'
 import { extractColorsFromImage, getColorAtPixel } from '@/lib/utils/color-extraction'
 import { ColorPaletteEditor } from './color-palette-editor'
@@ -14,20 +15,21 @@ interface Phase3ColorExtractionProps {
 export function Phase3ColorExtraction({ onBack, onComplete }: Phase3ColorExtractionProps) {
   const session = useSessionStore((state) => state.session)
   const updateSession = useSessionStore((state) => state.updateSession)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const magnifierCanvasRef = useRef<HTMLCanvasElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
   const [loading, setLoading] = useState(false)
   const [activeColorIndex, setActiveColorIndex] = useState<number | null>(null)
-  const [magnifierPosition, setMagnifierPosition] = useState<{ x: number; y: number } | null>(null)
-  const [hoverColor, setHoverColor] = useState<string | null>(null)
 
   const mainImage = session?.images?.mainImage
   const extractedColors = session?.images?.extractedColors ?? []
 
-  useEffect(() => {
-    setIsVisible(true)
-  }, [])
+  const {
+    sourceCanvasRef,
+    magnifierCanvasRef,
+    magnifierPosition,
+    hoverColor,
+    handleMouseMove,
+    handleMouseLeave,
+    magnifierSize,
+  } = useColorMagnifier(activeColorIndex !== null)
 
   const extractColors = useCallback(async () => {
     if (!mainImage) return
@@ -58,9 +60,9 @@ export function Phase3ColorExtraction({ onBack, onComplete }: Phase3ColorExtract
 
   // 画像をキャンバスに描画
   useEffect(() => {
-    if (!mainImage || !canvasRef.current) return
+    if (!mainImage || !sourceCanvasRef.current) return
 
-    const canvas = canvasRef.current
+    const canvas = sourceCanvasRef.current
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
@@ -72,100 +74,19 @@ export function Phase3ColorExtraction({ onBack, onComplete }: Phase3ColorExtract
       ctx.drawImage(img, 0, 0)
     }
     img.src = mainImage.url
-  }, [mainImage])
+  }, [mainImage, sourceCanvasRef])
 
-  const getCanvasCoordinates = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    if (!canvasRef.current) return null
-    const canvas = canvasRef.current
+  const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    if (activeColorIndex === null || !sourceCanvasRef.current) return
+
+    const canvas = sourceCanvasRef.current
     const rect = canvas.getBoundingClientRect()
     const scaleX = canvas.width / rect.width
     const scaleY = canvas.height / rect.height
     const x = Math.floor((e.clientX - rect.left) * scaleX)
     const y = Math.floor((e.clientY - rect.top) * scaleY)
-    return { x, y, clientX: e.clientX, clientY: e.clientY }
-  }
 
-  const handleCanvasMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    if (activeColorIndex === null || !canvasRef.current) return
-
-    const coords = getCanvasCoordinates(e)
-    if (!coords) return
-
-    const { x, y, clientX, clientY } = coords
-    const canvas = canvasRef.current
-
-    // Get color at current position
     const hex = getColorAtPixel(canvas, x, y)
-    setHoverColor(hex)
-
-    // Set magnifier position (offset to not cover cursor)
-    setMagnifierPosition({ x: clientX + 20, y: clientY - 80 })
-  }
-
-  // Draw magnifier when position updates
-  useEffect(() => {
-    if (!magnifierPosition || !hoverColor || !canvasRef.current || !magnifierCanvasRef.current) return
-
-    const canvas = canvasRef.current
-    const magnifierCanvas = magnifierCanvasRef.current
-    const magnifierCtx = magnifierCanvas.getContext('2d')
-    if (!magnifierCtx) return
-
-    const rect = canvas.getBoundingClientRect()
-    const scaleX = canvas.width / rect.width
-    const scaleY = canvas.height / rect.height
-
-    // Calculate canvas coordinates from screen position
-    const x = Math.floor((magnifierPosition.x - 20 - rect.left) * scaleX)
-    const y = Math.floor((magnifierPosition.y + 80 - rect.top) * scaleY)
-
-    // Draw magnified area (7x7 pixels, scaled up)
-    const magnifySize = 7
-    const pixelSize = 14
-    magnifierCanvas.width = magnifySize * pixelSize
-    magnifierCanvas.height = magnifySize * pixelSize
-
-    magnifierCtx.imageSmoothingEnabled = false
-
-    // Get the source area (centered on cursor)
-    const sourceX = x - Math.floor(magnifySize / 2)
-    const sourceY = y - Math.floor(magnifySize / 2)
-
-    // Draw each pixel as a larger square
-    for (let py = 0; py < magnifySize; py++) {
-      for (let px = 0; px < magnifySize; px++) {
-        const sx = sourceX + px
-        const sy = sourceY + py
-        if (sx >= 0 && sx < canvas.width && sy >= 0 && sy < canvas.height) {
-          const pixelHex = getColorAtPixel(canvas, sx, sy)
-          magnifierCtx.fillStyle = pixelHex
-        } else {
-          magnifierCtx.fillStyle = '#E5E5E5'
-        }
-        magnifierCtx.fillRect(px * pixelSize, py * pixelSize, pixelSize, pixelSize)
-      }
-    }
-
-    // Draw center crosshair
-    const centerOffset = Math.floor(magnifySize / 2) * pixelSize
-    magnifierCtx.strokeStyle = '#FFFFFF'
-    magnifierCtx.lineWidth = 2
-    magnifierCtx.strokeRect(centerOffset, centerOffset, pixelSize, pixelSize)
-  }, [magnifierPosition, hoverColor])
-
-  const handleCanvasMouseLeave = () => {
-    setMagnifierPosition(null)
-    setHoverColor(null)
-  }
-
-  const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    if (activeColorIndex === null || !canvasRef.current) return
-
-    const coords = getCanvasCoordinates(e)
-    if (!coords) return
-
-    const { x, y } = coords
-    const hex = getColorAtPixel(canvasRef.current, x, y)
 
     const newColors = [...extractedColors]
     newColors[activeColorIndex] = {
@@ -182,8 +103,6 @@ export function Phase3ColorExtraction({ onBack, onComplete }: Phase3ColorExtract
     })
 
     setActiveColorIndex(null)
-    setMagnifierPosition(null)
-    setHoverColor(null)
   }
 
   const handleColorChange = (index: number, hex: string) => {
@@ -200,6 +119,7 @@ export function Phase3ColorExtraction({ onBack, onComplete }: Phase3ColorExtract
   }
 
   const isFormValid = extractedColors.length > 0
+  const showMagnifier = activeColorIndex !== null && magnifierPosition && hoverColor
 
   if (!mainImage) return null
 
@@ -212,15 +132,15 @@ export function Phase3ColorExtraction({ onBack, onComplete }: Phase3ColorExtract
           left: magnifierPosition?.x ?? 0,
           top: magnifierPosition?.y ?? 0,
           zIndex: 9999,
-          opacity: activeColorIndex !== null && magnifierPosition && hoverColor ? 1 : 0,
-          visibility: activeColorIndex !== null && magnifierPosition && hoverColor ? 'visible' : 'hidden',
+          opacity: showMagnifier ? 1 : 0,
+          visibility: showMagnifier ? 'visible' : 'hidden',
         }}
       >
         <div className="bg-white rounded-xl shadow-2xl border-2 border-[#171717] overflow-hidden">
           <canvas
             ref={magnifierCanvasRef}
             className="block"
-            style={{ width: 98, height: 98 }}
+            style={{ width: magnifierSize, height: magnifierSize }}
           />
           <div className="flex items-center gap-2 px-3 py-2 bg-[#171717]">
             <div
@@ -234,9 +154,7 @@ export function Phase3ColorExtraction({ onBack, onComplete }: Phase3ColorExtract
         </div>
       </div>
 
-      <div
-        className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-      >
+      <div className="animate-fade-in-up">
       {/* Title */}
       <div className="mb-8">
         <p className="text-sm uppercase tracking-widest text-[#737373] mb-3">Step 07 - Phase 3</p>
@@ -281,18 +199,15 @@ export function Phase3ColorExtraction({ onBack, onComplete }: Phase3ColorExtract
       {/* Main Content */}
       <div className="grid md:grid-cols-2 gap-8 mb-8">
         {/* Image Area */}
-        <div
-          className={`transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-          style={{ transitionDelay: '100ms' }}
-        >
+        <div className="animate-fade-in-up-sm stagger-1">
           <div className="bg-white rounded-2xl border border-[#E5E5E5] p-4 shadow-sm">
             <h3 className="font-medium text-[#171717] mb-3">メイン画像</h3>
             <div className="relative">
               <canvas
-                ref={canvasRef}
+                ref={sourceCanvasRef}
                 onClick={handleCanvasClick}
-                onMouseMove={handleCanvasMouseMove}
-                onMouseLeave={handleCanvasMouseLeave}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
                 className={`w-full rounded-xl ${activeColorIndex !== null ? 'cursor-crosshair' : 'cursor-default'}`}
               />
               {activeColorIndex !== null && (
@@ -305,10 +220,7 @@ export function Phase3ColorExtraction({ onBack, onComplete }: Phase3ColorExtract
         </div>
 
         {/* Color Palette Area */}
-        <div
-          className={`transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-          style={{ transitionDelay: '200ms' }}
-        >
+        <div className="animate-fade-in-up-sm stagger-2">
           <div className="bg-white rounded-2xl border border-[#E5E5E5] p-4 shadow-sm">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-medium text-[#171717]">抽出したカラー</h3>

@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { useSessionStore } from '@/lib/store/session-store'
 import type { UnsplashImage } from '@/types/session'
@@ -11,14 +10,11 @@ interface Phase2MainSelectProps {
   onComplete: () => void
 }
 
+const staggerClasses = ['stagger-1', 'stagger-2', 'stagger-3', 'stagger-4', 'stagger-5', 'stagger-6']
+
 export function Phase2MainSelect({ onBack, onComplete }: Phase2MainSelectProps) {
   const session = useSessionStore((state) => state.session)
   const updateSession = useSessionStore((state) => state.updateSession)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    setIsVisible(true)
-  }, [])
 
   const selectedImages = session?.images?.selectedImages ?? []
   const mainImage = session?.images?.mainImage
@@ -36,9 +32,7 @@ export function Phase2MainSelect({ onBack, onComplete }: Phase2MainSelectProps) 
   const isFormValid = mainImage !== null
 
   return (
-    <div
-      className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-    >
+    <div className="animate-fade-in-up">
       {/* Title */}
       <div className="mb-8">
         <p className="text-sm uppercase tracking-widest text-[#737373] mb-3">Step 07 - Phase 2</p>
@@ -83,8 +77,7 @@ export function Phase2MainSelect({ onBack, onComplete }: Phase2MainSelectProps) 
         {selectedImages.map((image, index) => (
           <div
             key={image.id}
-            className={`transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-            style={{ transitionDelay: `${100 + index * 50}ms` }}
+            className={`animate-fade-in-up-sm ${staggerClasses[index % staggerClasses.length]}`}
           >
             <ImageCard
               src={image.thumbnailUrl}
@@ -99,10 +92,7 @@ export function Phase2MainSelect({ onBack, onComplete }: Phase2MainSelectProps) 
 
       {/* Selected Main Image Preview */}
       {mainImage && (
-        <div
-          className={`bg-white rounded-2xl border border-[#E5E5E5] p-6 mb-6 transition-all duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-          style={{ transitionDelay: '400ms' }}
-        >
+        <div className="bg-white rounded-2xl border border-[#E5E5E5] p-6 mb-6 animate-fade-in-up-sm">
           <div className="flex items-center gap-2 mb-4">
             <svg
               className="w-5 h-5 text-yellow-500"

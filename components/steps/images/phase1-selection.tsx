@@ -24,16 +24,17 @@ const generateMockImages = (page: number): UnsplashImage[] => {
   }))
 }
 
+// Staggered animation delay classes
+const staggerClasses = ['stagger-1', 'stagger-2', 'stagger-3', 'stagger-4', 'stagger-5', 'stagger-6']
+
 export function Phase1Selection({ onComplete, onBack }: Phase1SelectionProps) {
   const session = useSessionStore((state) => state.session)
   const createSession = useSessionStore((state) => state.createSession)
   const updateSession = useSessionStore((state) => state.updateSession)
-  const [isVisible, setIsVisible] = useState(false)
   const [page, setPage] = useState(0)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    setIsVisible(true)
     // セッションが存在しない場合は作成
     if (!session) {
       createSession()
@@ -87,9 +88,7 @@ export function Phase1Selection({ onComplete, onBack }: Phase1SelectionProps) {
   const isFormValid = selectedImages.length === 6
 
   return (
-    <div
-      className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-    >
+    <div className="animate-fade-in-up">
       {/* Title */}
       <div className="mb-8">
         <p className="text-sm uppercase tracking-widest text-[#737373] mb-3">Step 07 - Phase 1</p>
@@ -151,8 +150,7 @@ export function Phase1Selection({ onComplete, onBack }: Phase1SelectionProps) {
         {images.map((image, index) => (
           <div
             key={image.id}
-            className={`transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-            style={{ transitionDelay: `${100 + index * 50}ms` }}
+            className={`animate-fade-in-up-sm ${staggerClasses[index % staggerClasses.length]}`}
           >
             <ImageCard
               src={image.thumbnailUrl}
